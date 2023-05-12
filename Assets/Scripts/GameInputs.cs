@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameInputs : MonoBehaviour
@@ -28,5 +29,16 @@ public class GameInputs : MonoBehaviour
         }
         
         return inputVector;
+    }
+    
+    public bool PauseState()
+    {
+        // Enum
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

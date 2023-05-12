@@ -36,10 +36,6 @@ public class Player : MonoBehaviour, IKitchenObjectParents
       PlayerMovement();
       if (Input.GetKey(KeyCode.LeftShift))
       {
-         // for (int i = 0; i < 50; i++)
-         // {
-         //    _speedBoost = 1f + i;
-         // }
          playerMovementSpeed = 15f;
       }
       else

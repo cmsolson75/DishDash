@@ -31,7 +31,7 @@ public class DeliveryManagerSingleUI : MonoBehaviour
 
         foreach (KitchenObjectSO kitchenObjectSO in recipeSO.kitchenObjectSOList)
         {
-            Debug.Log("Trigger");
+            // Debug.Log("Trigger");
             Transform iconTransform = Instantiate(iconTemplate, iconContainer);
             iconTransform.gameObject.SetActive(true);
             iconTransform.GetComponent<Image>().sprite = kitchenObjectSO.sprite;
