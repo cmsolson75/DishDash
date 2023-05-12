@@ -6,6 +6,7 @@ public class CuttingCounter : BaseCounter
 {
     // [SerializeField] private KitchenObjectSO cutKitchenObjectSO;
     [SerializeField] private CuttingRecipeSO[] cuttingRecepeSOArray;
+    // [SerializeField] private AudioClip cuttingAudio;
     public override void Interact(Player player)
     {
         // base.Interact(player);
@@ -53,7 +54,7 @@ public class CuttingCounter : BaseCounter
         {
             KitchenObjectSO outputKitchenObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectSO());
             GetKitchenObject().DestroySelf();
-            
+
             KitchenObject.SpawnKitchenObject(outputKitchenObjectSO, this);
             // Transform kitchenObjectTransform = Instantiate(cutKitchenObjectSO.prefab);
             // kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);

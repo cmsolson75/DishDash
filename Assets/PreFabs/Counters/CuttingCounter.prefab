@@ -146,6 +146,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca2e0eedd57d54479b113ea525675c2a, type: 2}
   - {fileID: 11400000, guid: 6d42da5fb6de24d37b1d1311bd0911ae, type: 2}
   - {fileID: 11400000, guid: 11ed44d29f4864ee0adcff546fbb2b33, type: 2}
+  cuttingAudio: {fileID: 8300000, guid: b32d2f10528fb4f4ca70ad4c99bb793c, type: 3}
 --- !u!4 &3454405700605335127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7777561183408996839, guid: a80812904a99d4bc6a50e0eba2554e17, type: 3}

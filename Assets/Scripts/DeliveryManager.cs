@@ -6,6 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class DeliveryManager : MonoBehaviour
 {
@@ -13,11 +14,16 @@ public class DeliveryManager : MonoBehaviour
     // private int playerScore = 0;
     public event EventHandler OnRecipeSpawned;
     public event EventHandler OnRecipeCompleted;
-    public event EventHandler OnRecipeFailed;
+    // public event EventHandler OnRecipeFailed;
+    
     
     [SerializeField] private RecipeListSO recipeListSO;
     [SerializeField] private TextMeshProUGUI playerScoreUI;
+    [SerializeField] private TextMeshProUGUI scoreMultUI;
+    [SerializeField] private AudioClip Ding;
     private List<RecipeSO> waitingRecipeSOList;
+
+    private float _scoreMultiply = 1f;
     
     private float spawnRecipeTimer;
     private float spawnRecipeTimerMax = 4f;
@@ -63,6 +69,7 @@ public class DeliveryManager : MonoBehaviour
     {
         Timer = 120f;
         GameState = State.Play;
+        // _scoreMultiply = 1f;
     }
 
     private void Update()
@@ -76,7 +83,7 @@ public class DeliveryManager : MonoBehaviour
         if (Timer <= 0f)
         {
             Timer = 0f;
-            Debug.Log("Shift Over");
+            SceneManager.LoadScene("GameOver");
         }
 
         // Debug.Log(waitingRecipeSOList.Count);
@@ -132,26 +139,30 @@ public class DeliveryManager : MonoBehaviour
                     {
                             
                         plateContentsMatchesRecipe = false;
-                        OnRecipeFailed?.Invoke(this, EventArgs.Empty);
+                        // Debug.Log("Incorect Recipe");
+                        // OnRecipeFailed?.Invoke(this, EventArgs.Empty);
                     }
 
                     if (plateContentsMatchesRecipe)
                     {
-                        // playerScore += 10; 
-                        // Debug.Log(playerScore);
-                        Debug.Log("Player delivered the correct recipe");
+
+                        // Debug.Log("Player delivered the correct recipe");
                         waitingRecipeSOList.RemoveAt(i);
                         int numIngredients = waitingRecipeSO.kitchenObjectSOList.Count;
-                        
-                        
                         AddPlayerScore(numIngredients);
+                        AudioManager.Instance.PlaySound(Ding, 1f);
                         OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
-                        
+
                         return;
                     }
+
                 }
+                // RemovePlayerScore();
                 // Debug.Log("Incorrect Recipe");
             }
+            // Debug.Log("NO MATCH");
+            RemovePlayerScore();
+            // return;
         }
     }
 
@@ -159,20 +170,25 @@ public class DeliveryManager : MonoBehaviour
     {
         return waitingRecipeSOList;
     }
-
-    // public int AddPlayerScore(int lengthRecipeSo)
-    // {
-    //     int ingredientScore = 10;
-    //     
-    //     return lengthRecipeSo * ingredientScore;
-    // }
+    
     private void AddPlayerScore(int numIngredient)
     {
-        int ingredientValue = 10;
+        int ingredientValue = 50;
         playerScore += numIngredient * ingredientValue;
         
-        playerScoreUI.text = "POINTS: " + playerScore;
+        playerScoreUI.text = "POINTS: " + playerScore * _scoreMultiply;
+        scoreMultUI.text = "BONUS: " + _scoreMultiply + "x";
+        _scoreMultiply += 0.1f;
         // Debug.Log();
+    }
+
+    private void RemovePlayerScore()
+    {
+        // Debug.Log(playerScore);
+        // playerScore -= 15;
+        // playerScoreUI.text = "POINTS: " + playerScore;
+        scoreMultUI.text = "BONUS: " + _scoreMultiply +"x";
+        _scoreMultiply = 1f;
     }
     public void ToggleGUIVisability(TextMeshProUGUI GUI)
     {

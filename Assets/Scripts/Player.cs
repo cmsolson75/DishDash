@@ -13,6 +13,8 @@ public class Player : MonoBehaviour, IKitchenObjectParents
    [SerializeField] private float playerMovementSpeed = 5f;
    [SerializeField] private GameInputs gameInputs;
    [SerializeField] private LayerMask countersLayerMask;
+
+   [SerializeField] private AudioClip CuttingSound;
    // private float _speedBoost = 1f;
    
    private readonly float _rotateSpeed = 15f;
@@ -70,6 +72,7 @@ public class Player : MonoBehaviour, IKitchenObjectParents
             if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter))
             {
                baseCounter.InteractAlternate(this);
+               AudioManager.Instance.PlaySound(CuttingSound, 1.0f);
             }
             // Debug.Log("Testing");
          }

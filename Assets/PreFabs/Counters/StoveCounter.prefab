@@ -94,6 +94,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dbaf0171063eb45cf877e88880fec94f, type: 2}
   _burningRecipeSOArray:
   - {fileID: 11400000, guid: dff7d77cefbed440cabf1f7ac591a251, type: 2}
+  Sizzle: {fileID: 8300000, guid: dd75e0834b2934c9c9115302d9d20af4, type: 3}
 --- !u!1001 &7531948464353460255
 PrefabInstance:
   m_ObjectHideFlags: 0

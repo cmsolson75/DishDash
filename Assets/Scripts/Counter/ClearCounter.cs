@@ -6,6 +6,8 @@ using UnityEngine;
 public class ClearCounter : BaseCounter
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
+
+    [SerializeField] private AudioClip putDown;
     // [SerializeField] private Transform counterTopPoint;
     // [SerializeField] private ClearCounter secondClearCounter;
     // private KitchenObject _kitchenObject;
@@ -27,6 +29,7 @@ public class ClearCounter : BaseCounter
         {
             if (player.HasKitchenObject())
             {
+                
                 //Player is carrying object
                 if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
                 {
@@ -34,6 +37,7 @@ public class ClearCounter : BaseCounter
                     if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
                     {
                         GetKitchenObject().DestroySelf();
+                        AudioManager.Instance.PlaySound(putDown, 1f);
                     }
                     
                     
@@ -46,6 +50,7 @@ public class ClearCounter : BaseCounter
                         if (plateKitchenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO()))
                         {
                             player.GetKitchenObject().DestroySelf();
+                            AudioManager.Instance.PlaySound(putDown, 1f);
                         }
                     }
                 }

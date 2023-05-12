@@ -15,6 +15,7 @@ public class StoveCounter : BaseCounter
     
     [SerializeField] private FryingRecepeSO[] _fryingRecipeSOArray;
     [SerializeField] private BurningRecipeSO[] _burningRecipeSOArray;
+    [SerializeField] private AudioClip Sizzle;
     private float _fryingTimer;
     private float _burningTimer;
     private BurningRecipeSO burningRecipeSO;
@@ -77,6 +78,7 @@ public class StoveCounter : BaseCounter
                     /*Frying Progress*/
                     _fryingRecepeSO = GetFryingRecepeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
                     state = State.Frying;
+                    AudioManager.Instance.PlaySound(Sizzle, 1f);
                     _fryingTimer = 0f;
                 }
             }
